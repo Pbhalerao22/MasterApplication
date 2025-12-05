@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.RoleMasterModel>
+
+@{ ViewData["Title"] = "Role Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Edit Role</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="RoleMaster" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Role Name</label>
+                                <input asp-for="@Model.First().ROLENAME" readonly class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Role Description</label>
+                                <input asp-for="@Model.First().ROLEDESCRIPTION" class="form-control form-control-sm mandatory" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                @*<div class="form-check">*@
+                                    <label class="control-label">Locked</label>
+                                    @Html.CheckBoxFor(m => m.First().LOCKED)
+
+                                @*</div>*@
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnUpdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Update
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/RoleMaster/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

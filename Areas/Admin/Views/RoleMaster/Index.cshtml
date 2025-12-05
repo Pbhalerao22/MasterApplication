@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.RoleMasterModel>
+@{ ViewData["Title"] = "Role Master";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Role Master</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <a class="btn btn-outline-primary btn-sm mb-1" asp-area="Admin" asp-controller="RoleMaster" asp-action="Create"><i class="fe fe-plus me-2"></i>Add New Role</a>
+                <div class="row">
+                    <div class="col-md-12 mr-0 mt-3">
+                        <table id="gvMaster" class="table border-top-0 table-bordered text-nowrap border-bottom dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>Role Name</th>
+                                    <th>Code</th>
+                                    <th>Role Description</th>
+                                    <th>Locked</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/PageJS/Admin/RoleMaster.js"></script>
+    @if (TempData["Message"] != null)
+    {
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+            toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+            toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+            toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+            toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+        }
+
+    })
+</script>
+}
+}

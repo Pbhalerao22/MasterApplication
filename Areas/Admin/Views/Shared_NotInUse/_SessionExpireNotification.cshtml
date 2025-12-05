@@ -1,0 +1,47 @@
+﻿@model MasterApplication.Areas.Admin.Models.HomeModel
+
+<div class="col-md-12">
+    <h3>Session Idle:&nbsp;<span id="secondsIdle"></span>&nbsp;seconds.</h3>
+    <div id="dialog">
+        Your Session will expire in&nbsp;<span id="seconds"></span>&nbsp;seconds.<br />
+        Do you want to reset?
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            title: "Session Expiring",
+            buttons: {
+                Ok: function () {
+                    ResetSession();
+                },
+                Close: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    });
+    function SessionExpireAlert(timeout) {
+        var seconds = timeout / 1000;
+        $("#secondsIdle").html(seconds);
+        $("#seconds").html(seconds);
+        setInterval(function () {
+            seconds--;
+            $("#secondsIdle").html(seconds);
+            $("#seconds").html(seconds);
+        }, 1000);
+        setTimeout(function () {
+            //Show Popup before 20 seconds of timeout.
+            $('#dialog').dialog('open');
+        }, timeout - 20 * 1000);
+        setTimeout(function () {
+            window.location = "Expired.aspx";
+        }, timeout);
+    };
+    function ResetSession() {
+        //Redirect to refresh Session.
+        window.location = window.location.href;
+    };
+</script>

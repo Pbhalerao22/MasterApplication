@@ -1,0 +1,80 @@
+﻿
+@model MasterApplication.Areas.Admin.Models.SMSConfigMasterModel
+@{ ViewData["Title"] = "SMSConfigMaster Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Create SMSConfigMaster</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Create" asp-controller="SMSConfigMaster" class="form-horizontal">
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Process_Type</label>
+                                <input asp-for="PROCESS_TYPE" class="form-control form-control-sm  mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Process_Sub_Type</label>
+                                <input asp-for="PROCESS_SUB_TYPE" class="form-control  form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">SMS_Content</label>
+                                @Html.TextAreaFor(m => m.SMS_CONTENT, htmlAttributes: new { @class = "form-control-sm mandatory", @rows = 2, @cols = 50 })
+                                @*<input asp-for="SMS_CONTENT" class="form-control  form-control-sm mandatory" />*@
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Overdue Date</label>
+                                <input asp-for="OVERDUE_DATE" class="form-control  form-control-sm" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Number Of Days</label>
+                                <input asp-for="NUMBER_OF_DAYS" class="form-control  form-control-sm" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnSubmit" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Submit
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/SMSConfigMaster/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/PageJS/Admin/SMSConfigMaster.js"></script>
+   
+
+    @if (TempData["Message"] != null)
+    {
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+            toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+            toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+            toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+            toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+        }
+    })
+</script>}
+}

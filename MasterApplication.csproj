@@ -1,0 +1,175 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <TypeScriptToolsVersion>4.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+  <PropertyGroup>               
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\GenericConverter\**" />
+    <Compile Remove="Areas\LMS\BL\LMSEmployee\**" />
+    <Compile Remove="Areas\LMS\Controllers\LMSEmployee\**" />
+    <Compile Remove="Areas\LMS\Models\LMSEmployee\**" />
+    <Compile Remove="Areas\LMS\Views\FileUpload\**" />
+    <Compile Remove="Areas\LMS\Views\LeadGenFileUpload\**" />
+    <Compile Remove="Areas\LMS\Views\LMSBranchFileUpload\**" />
+    <Compile Remove="Areas\LMS\Views\LMSEmployeeFileUpload\**" />
+    <Compile Remove="Areas\LMS\Views\LMSFileUpload\**" />
+    <Compile Remove="Areas\LMS\Views\LMSLeadGenFileUpload\**" />
+    <Compile Remove="Areas\VideoTest\**" />
+    <Compile Remove="BL\**" />
+    <Content Remove="Areas\GenericConverter\**" />
+    <Content Remove="Areas\LMS\BL\LMSEmployee\**" />
+    <Content Remove="Areas\LMS\Controllers\LMSEmployee\**" />
+    <Content Remove="Areas\LMS\Models\LMSEmployee\**" />
+    <Content Remove="Areas\LMS\Views\FileUpload\**" />
+    <Content Remove="Areas\LMS\Views\LeadGenFileUpload\**" />
+    <Content Remove="Areas\LMS\Views\LMSBranchFileUpload\**" />
+    <Content Remove="Areas\LMS\Views\LMSEmployeeFileUpload\**" />
+    <Content Remove="Areas\LMS\Views\LMSFileUpload\**" />
+    <Content Remove="Areas\LMS\Views\LMSLeadGenFileUpload\**" />
+    <Content Remove="Areas\VideoTest\**" />
+    <Content Remove="BL\**" />
+    <EmbeddedResource Remove="Areas\GenericConverter\**" />
+    <EmbeddedResource Remove="Areas\LMS\BL\LMSEmployee\**" />
+    <EmbeddedResource Remove="Areas\LMS\Controllers\LMSEmployee\**" />
+    <EmbeddedResource Remove="Areas\LMS\Models\LMSEmployee\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\FileUpload\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\LeadGenFileUpload\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\LMSBranchFileUpload\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\LMSEmployeeFileUpload\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\LMSFileUpload\**" />
+    <EmbeddedResource Remove="Areas\LMS\Views\LMSLeadGenFileUpload\**" />
+    <EmbeddedResource Remove="Areas\VideoTest\**" />
+    <EmbeddedResource Remove="BL\**" />
+    <None Remove="Areas\GenericConverter\**" />
+    <None Remove="Areas\LMS\BL\LMSEmployee\**" />
+    <None Remove="Areas\LMS\Controllers\LMSEmployee\**" />
+    <None Remove="Areas\LMS\Models\LMSEmployee\**" />
+    <None Remove="Areas\LMS\Views\FileUpload\**" />
+    <None Remove="Areas\LMS\Views\LeadGenFileUpload\**" />
+    <None Remove="Areas\LMS\Views\LMSBranchFileUpload\**" />
+    <None Remove="Areas\LMS\Views\LMSEmployeeFileUpload\**" />
+    <None Remove="Areas\LMS\Views\LMSFileUpload\**" />
+    <None Remove="Areas\LMS\Views\LMSLeadGenFileUpload\**" />
+    <None Remove="Areas\VideoTest\**" />
+    <None Remove="BL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\LMS\BL\LMSBranchFileUpload.cs" />
+    <Compile Remove="Areas\LMS\BL\LMSEmployeeFileUpload.cs" />
+    <Compile Remove="Areas\LMS\BL\LMSFileUpload.cs" />
+    <Compile Remove="Areas\LMS\BL\LMSLeadGenFileUpload.cs" />
+    <Compile Remove="Areas\LMS\Controllers\LMSBranchFileUploadController.cs" />
+    <Compile Remove="Areas\LMS\Controllers\LMSEmployeeFileUploadController.cs" />
+    <Compile Remove="Areas\LMS\Controllers\LMSFileUploadController.cs" />
+    <Compile Remove="Areas\LMS\Controllers\LMSLeadGenFileUploadController.cs" />
+    <Compile Remove="Areas\LMS\Models\LMSBranchFileUploadModel.cs" />
+    <Compile Remove="Areas\LMS\Models\LMSEmployeeFileUploadModel.cs" />
+    <Compile Remove="Areas\LMS\Models\LMSFileUploadModel.cs" />
+    <Compile Remove="Areas\LMS\Models\LMSLeadGenFileUploadModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Shared\Components\Menu\_app-sidebar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Core.Renci.SshNet" Version="2021.10.2" />
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+    <PackageReference Include="MongoDB.Bson" Version="3.5.1" />
+    <PackageReference Include="MongoDB.Driver" Version="3.5.1" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.31" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.9.0" />
+    <PackageReference Include="SSH.NET" Version="2023.0.0" />
+    <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="26.1.35" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\CampaignPortal\Views\CampaignFileUpload\" />
+    <Folder Include="Areas\RRB\Data\" />
+    <Folder Include="wwwroot\Aml_Report_Template\Uploaded_File\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Shared\Components\Menu\_app-sidebar.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_app-header.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_app-header1.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_app-sidebar.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_app-sidebar1.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_footer.cshtml" />
+    <None Include="Pages\Shared\layouts\landingpage\_switcher.cshtml" />
+    <None Include="Pages\Shared\layouts\_app-header.cshtml" />
+    <None Include="Pages\Shared\layouts\_app-header1.cshtml" />
+    <None Include="Pages\Shared\layouts\_footer.cshtml" />
+    <None Include="Pages\Shared\layouts\_switcher.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.OpenPgp">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\BouncyCastle.OpenPgp.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MSEncrypto">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\MSEncrypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet.Async">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\Renci.SshNet.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="SshNet.Security.Cryptography">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\SshNet.Security.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\System.DirectoryServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices.Protocols">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\System.DirectoryServices.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\..\..\..\..\DLL\BOB_ePower_Dll\System.Drawing.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

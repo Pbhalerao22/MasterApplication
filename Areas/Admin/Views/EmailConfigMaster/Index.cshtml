@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.EmailConfigMasterModel>
+@{ ViewData["Title"] = "Email Config Master";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<style>
+    .text-wrap {
+        white-space: normal;
+    }
+
+    .width-200 {
+        width: 450px;
+    }
+</style>
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Email Config Master</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <a class="btn btn-outline-primary btn-sm mb-1" asp-area="Admin" asp-controller="EmailConfigMaster" asp-action="Create"><i class="fe fe-plus me-2"></i>Add New Email</a>
+                <div class="row" style="overflow-y:scroll">
+                    <div class="col-md-12 mr-0 mt-3">
+                        <table id="gvMaster" class="table border-top-0 table-bordered text-nowrap border-bottom dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th>Process Type</th>
+                                    <th>Code</th>
+                                    <th>Process Sub Type</th>
+                                    <th>Email Content</th>
+                                    <th>Attachment Path</th>
+                                    @*<th>Attachment Name</th>*@
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+
+    <script src="~/PageJS/Admin/EmailConfigMaster.js" asp-append-version="true"></script>
+
+
+
+    @if (TempData["Message"] != null)
+    {
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+            toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+            toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+            toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+        }
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+            toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+        }
+
+    })
+</script>}
+}

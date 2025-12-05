@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.EmailConfigMasterModel>
+
+@{ ViewData["Title"] = "EmailConfigMaster Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Edit EmailConfigMaster</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="EmailConfigMaster" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Process Type</label>
+                                <input asp-for="@Model.First().PROCESS_TYPE" readonly class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Process Sub Type</label>
+                                <input asp-for="@Model.First().PROCESS_SUB_TYPE" class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Email Content</label>
+                                <input class="form-control form-control-sm" id="formFileSm" asp-for="@Model.First().EmailContentFile" type="file">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="formFileSm">Attachment Path: </label>
+                                <input class="form-control form-control-sm" id="formFileSm" asp-for="@Model.First().AttachmentFile" type="file" multiple>
+                            </div>
+                           
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnUpdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Update
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/EmailConfigMaster/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

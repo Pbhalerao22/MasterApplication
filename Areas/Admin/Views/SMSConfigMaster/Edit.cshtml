@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.SMSConfigMasterModel>
+
+@{ ViewData["Title"] = "SMSConfigMaster Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Edit SMSConfigMaster</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="SMSConfigMaster" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Process_Type</label>
+                                <input asp-for="@Model.First().PROCESS_TYPE" readonly class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Process_Sub_Type</label>
+                                <input asp-for="@Model.First().PROCESS_SUB_TYPE" class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> SMS_Content</label>
+                                <input asp-for="@Model.First().SMS_CONTENT" class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Overdue_Date</label>
+                                <input asp-for="@Model.First().OVERDUE_DATE" class="form-control form-control-sm mandatory" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label"> Number_Of_Days</label>
+                                <input asp-for="@Model.First().NUMBER_OF_DAYS" class="form-control form-control-sm mandatory" />
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnUpdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Update
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/SMSConfigMaster/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

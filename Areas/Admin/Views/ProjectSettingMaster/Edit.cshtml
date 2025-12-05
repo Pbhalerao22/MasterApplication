@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.ProjectSettingMasterModel>
+
+@{ ViewData["Title"] = " ProjectSettingMaster Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="ProjectSettingMaster" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Project_Name</label>
+                                <input asp-for="@Model.First().PROJECT_NAME" readonly class="form-control form-control-sm mandatory" autocomplete="off"/>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label">KeyName</label>
+                                <input asp-for="@Model.First().KEYNAME" readonly class="form-control form-control-sm mandatory" autocomplete="off"/>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label">KeyValue</label>
+                                <input asp-for="@Model.First().KEYVALUE" class="form-control form-control-sm mandatory" autocomplete="off"/>
+                            </div>
+
+                            <div class="form-group col-md-1.1">
+                                <div class="form-check  ">
+                                    @Html.CheckBoxFor(m => m.First().LOCKED)
+                                    <label class="form-check-label">Locked</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnupdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Update
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/ProjectSettingMaster/Index">
+                                    <i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

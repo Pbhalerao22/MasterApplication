@@ -1,0 +1,205 @@
+﻿@model MasterApplication.Areas.Admin.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutFullScreen";
+}
+<form class="container-fluid" asp-area="Admin" asp-controller="Login" asp-action="LoginUser" method="post">
+    <div class="logo"></div>
+    <div class="login-block">
+        <h1>Login</h1>
+        @*
+            @Html.TextBoxFor(X => X.TXT_UserName, new { @placeholder = Html.DisplayNameFor(x => x.TXT_UserName) })
+            @Html.PasswordFor(X => X.TXT_Password, new { @placeholder = Html.DisplayNameFor(x => x.TXT_Password) })
+        *@
+        <div class="form-group col-md-2">
+            <input asp-for="TXT_UserName" id="idUserName" class="form-control form-control-sm mandatory" autocomplete="one-time-code" autoCompleteType="disable" placeholder="UserName" />
+
+            <input id="idPassword" type="password" class="form-control form-control-sm mandatory" autocomplete="one-time-code" autoCompleteType="disable" placeholder="Password" />
+
+            <input asp-for="TXT_Password" id="idHdnPassword" type="hidden" class="form-control form-control-sm" autocomplete="one-time-code" autoCompleteType="disable" placeholder="Password" />
+        </div>
+
+        <button id="btnLoginSubmit">Submit</button>
+    </div>
+</form>
+
+@*
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("body").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    $('#idHdnPassword').val(strEncryptPass);
+                    $('#btnLoginSubmit').trigger('click')
+                    return false;
+                }
+            });
+
+            //$('#idPassword').blur(function () {
+            //    enCryptPass();
+            //});
+
+            $('#idPassword').on('input propertychange paste', function () {
+                //$('#idPassword').blur(function () {
+                enCryptPass();
+            });
+
+
+            function enCryptPass() {
+                var strPass = $('#idPassword').val();
+                //var strUserName = $('#idPassword').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/v2/Admin/Login/EnctryptSting",
+                    data: { Pass: strPass },
+                    dataType: "json",
+                    success: function (data) {
+                        strEncryptPass = data;
+                        $('#idHdnPassword').val(strEncryptPass);
+                    }
+                });
+            };;
+        })
+    </script>
+*@
+
+<script src="~/lib/SweetAlert2/sweetalert2.all.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js?V=1"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // $("body").keydown(function (e) {
+
+        //     if (e.keyCode == 13) {
+
+        //         $('#btnLoginSubmit').trigger('click')
+
+        //     }
+
+        // });
+        $(document).ready(function () {
+            $("body").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    $('#idHdnPassword').val(strEncryptPass);
+                    $('#btnLoginSubmit').trigger('click')
+                    return false;
+                }
+            });
+
+            //$('#idPassword').blur(function () {
+            //    enCryptPass();
+            //});
+
+            $('#idPassword').on('input propertychange paste', function () {
+                //$('#idPassword').blur(function () {
+                enCryptPass();
+            });
+
+
+            function enCryptPass() {
+                var strPass = $('#idPassword').val();
+                //var strUserName = $('#idPassword').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/v2/Admin/Login/EnctryptSting",
+                    data: { Pass: strPass },
+                    dataType: "json",
+                    success: function (data) {
+                        strEncryptPass = data;
+                        $('#idHdnPassword').val(strEncryptPass);
+                    }
+                });
+            };;
+        })
+
+
+        if ('@TempData["Message"].ToString().Split('|')[0]' == "errorLimit") {
+
+            Swal.fire({
+
+                //title: '<span style="font-size: 20px;font-style: normal">'@TempData["Message"].ToString()'</span>',
+
+                title: '<span style="font-size: 20px;font-style: normal">Account is locked, Kindly contact Administrator</span>',
+
+                //title: '<span style="font-size: 20px;font-style: normal">Maximum Attempt Reached. Enter Valid UserName and Password</span>',
+
+                showCancelButton: false,
+
+                confirmButtonText: `Ok`,
+
+                heightAuto: false
+
+            });
+
+        }
+
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "errorInvalid") {
+
+            Swal.fire({
+
+                //title: '<span style="font-size: 20px;font-style: normal">'@TempData["Message"].ToString()'</span>',
+
+                title: '<span style="font-size: 20px;font-style: normal">UserName or Password is incorrect!</span>',
+
+                showCancelButton: false,
+
+                confirmButtonText: `Ok`,
+
+                heightAuto: false
+
+            });
+
+        }
+
+        else if ('@TempData["Message"].ToString().Split('|')[0]' == "errorLock") {
+
+            Swal.fire({
+
+                //title: '<span style="font-size: 20px;font-style: normal">'@TempData["Message"].ToString()'</span>',
+
+                title: '<span style="font-size: 20px;font-style: normal">UserName is locked, Kindly contact Administrator</span>',
+
+                showCancelButton: false,
+
+                confirmButtonText: `Ok`,
+
+                heightAuto: false
+
+            });
+
+        }
+
+        if ('@TempData["Message"].ToString().Split('|')[0]' == "LoginChk") {
+
+            Swal.fire({
+
+                title: 'User Already Logged In! \n Do you want to force login?',
+
+                showDenyButton: true,
+
+                confirmButtonText: 'Yes',
+
+                denyButtonText: `Cancel`,
+
+            }).then((result) => {
+
+                /* Read more about isConfirmed, isDenied below */
+
+                if (result.isConfirmed) {
+
+                    window.location.href = '/v2/Admin/Login/ForceLogin';
+
+                } else if (result.isDenied) {
+
+                }
+
+            })
+
+        };
+
+    })
+
+</script>
+

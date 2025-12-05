@@ -1,0 +1,209 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content=" ASP.NET Core 6 Bootstrap Responsive Admin Web Dashboard Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="Keywords" content="admin, ASP.NET Core & Mvc, admin dashboard, ASP.NET Core & Mvc admin dashboard template, admin panel template, ASP.NET Core & Mvc admin template, bootstrap 5 admin template, bootstrap 5 dashboard, bootstrap admin dashboard, ASP.NET Core & Mvc bootstrap admin template, bootstrap ui kit, dashboard bootstrap 5, ASP.NET Core & Mvc dashboard design, dashboard html, ASP.NET Core & Mvc dashboard template, dashboard ui kit, ASP.NET Core & Mvc envato templates, ASP.NET Core & Mvc flat ui, premium quality">
+
+    <!-- Title -->
+    <title>emPowerV2</title>
+
+
+
+
+    <environment include="Development,Staging,Production">
+
+        <!-- Favicon -->
+        <link rel="icon" href="~/assets/img/brand/favicon.png" type="image/x-icon">
+
+        <!-- Bootstrap css -->
+        <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="style" asp-append-version="true">
+
+        <!-- Style css -->
+        <link href="~/assets/css/style.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/assets/css/plugins.css" rel="stylesheet" asp-append-version="true">
+
+        <!-- Icons css -->
+        <link href="~/assets/css/icons.css" rel="stylesheet" asp-append-version="true">
+
+        <link rel="stylesheet" href="~/css/DataTables/jquery.dataTables.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/SweetAlert2/sweetalert2.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/toastr/toastr.min.css" asp-append-version="true" />
+
+        <link href="~/css/jQuery/jquery-ui.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/assets/plugins/jquery-ui/themes/base/core.css" rel="stylesheet" />
+        <link href="~/assets/plugins/jquery-ui/themes/base/datepicker.css" rel="stylesheet" />
+        <link href="~/assets/plugins/jquery-ui/themes/base/theme.css" rel="stylesheet" />
+        <link href="~/css/Spinner.css" rel="stylesheet" />
+
+    </environment>
+
+
+    @* @RenderSection("Css",false/*required*/) *@
+    @await RenderSectionAsync("Css", required: false)
+
+    <!-- Animations css -->
+    <link href="~/assets/css/animate.css" rel="stylesheet" asp-append-version="true">
+    <style>
+        .breadcrumb-header {
+            display: flex;
+            margin-block-start: 10px;
+            margin-block-end: 2px;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .card-body {
+            padding: 10px !important;
+        }
+    </style>
+</head>
+<body class="main-body app sidebar-mini ltr sidenav-toggled hover-submenu">
+
+    <!-- Loader -->
+    <div id="global-loader">
+        <img src="~/assets/img/loaders/loader-4.svg" class="loader-img" alt="Loader">
+    </div>
+    <!-- /Loader -->
+    <!-- page -->
+    <div class="page custom-index">
+
+        <div>
+
+
+
+            <!-- app header code -->
+            <!--<partial name="~/Pages/Shared/layouts/_app-header.cshtml" />-->
+            @*@Html.Partial("~/Pages/Shared/layouts/_app-header.cshtml")*@
+            <partial name="~/Pages/Shared/layouts/_app-header.cshtml" />
+
+            <!-- End app header Code -->
+            <!-- app sidebar Code -->
+            <!--<partial name="~/Pages/Shared/layouts/_app-sidebar.cshtml" />-->
+            @*@Html.Partial("~/Pages/Shared/layouts/_app-sidebar.cshtml")*@
+            @await Component.InvokeAsync("Menu")
+
+            <!-- End app sidebar Code -->
+        </div>
+
+        <!-- main-content -->
+        <div class="main-content app-content">
+
+            <!-- container -->
+            <div class="main-container container-fluid">
+
+                <environment include="Development,Staging,Production">
+
+                    <script src="~/assets/plugins/jquery/jquery.min.js"></script>
+                </environment>
+
+                @RenderBody()
+
+
+
+            </div>
+            <!-- Container closed -->
+        </div>
+        <!-- main-content closed -->
+        <!-- Footer opened -->
+        <partial name="~/Pages/Shared/layouts/_footer.cshtml" />
+        <!-- Footer closed -->
+
+    </div>
+    <!-- page closed -->
+    <!-- Back-to-top -->
+    <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+
+    @* @RenderSection("Scripts",false/*required*/) *@
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+    <environment include="Development,Staging,Production">
+
+
+        <script src="~/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+
+        <script src="~/assets/plugins/bootstrap/popper.min.js"></script>
+        <script src="~/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/assets/plugins/ionicons/ionicons.js"></script>
+        <script src="~/assets/plugins/moment/moment.js"></script>
+        <script src="~/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+
+        @*<script src="~/assets/js/eva-icons.min.js"></script>*@
+
+        <script src="~/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="~/assets/plugins/perfect-scrollbar/p-scroll.js"></script>
+        <script src="~/assets/plugins/side-menu/sidemenu.js"></script>
+
+        <script src="~/assets/js/sticky.js"></script>
+
+        <script src="~/assets/js/themecolor.js"></script>
+
+        <script src="~/assets/js/swither-styles.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/DataTables/jquery.dataTables.min.js"></script>
+        <script src="~/lib/SweetAlert2/sweetalert2.all.min.js"></script>
+        <script src="~/lib/toastr/toastr.min.js"></script>
+
+        <script src="~/assets/js/custom.js"></script>
+        <script src="~/PageJS/Common.js"></script>
+
+    </environment>
+
+    <script type="text/javascript">
+
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton;
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onunload = function () { void (0) }
+        /*
+        const ulList = document.querySelectorAll(".side-menu li");
+        ulList.forEach(currUl => {
+            if (currUl.classList.contains("is-expanded")) {
+                currUl.classList.remove("is-expanded")
+            }
+        });
+        */
+        $('.side-menu li').each(function () {
+            if ($(this).hasClass('is-expanded')) {
+                $(this).removeClass('is-expanded')
+            }
+            if ($(this).find('a').hasClass('active')) {
+                $(this).find('a').removeClass('active')
+            }
+        })
+
+        $(".fc-datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+
+
+        if ($('#hfSessionState').val() == "0") {
+Swal.fire({
+                title: 'Your Session has expired, kindly login again!',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Go To Login',
+                allowOutsideClick: false
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location.href = $('#hfSessionState').attr('LoginUrl'); //"@Url.Action("Index","Login", new { Area = "Admin" })";
+                } else if (result.isDenied) {
+                    window.location.href = $('#hfSessionState').attr('LoginUrl');;// "@Url.Action("Index","Login", new { Area = "Admin" })";
+                }
+            })
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

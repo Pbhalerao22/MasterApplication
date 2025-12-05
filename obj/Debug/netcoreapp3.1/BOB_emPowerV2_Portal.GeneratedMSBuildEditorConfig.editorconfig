@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = MasterApplication
+build_property.ProjectDir = D:\GIT2025\BOBCARDS\NET_CORE_PROJECT\Applications\BOBCARDS_emPowerV2_Portal_DEV3\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

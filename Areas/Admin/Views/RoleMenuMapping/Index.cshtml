@@ -1,0 +1,50 @@
+﻿@model MasterApplication.Areas.Admin.Models.RoleMenuMappingModel
+@{ ViewData["Title"] = "Role Menu Mapping";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Role Menu Mapping</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <form asp-area="Admin" asp-action="Index" asp-controller="RoleMenuMapping" class="form-horizontal">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Select Role</label>
+                        <select id="drpRoleCode" asp-for="RoleCode" class="form-control form-control-sm">
+                            @foreach (var role in ViewBag.SelectRole)
+                            {
+                <option value=@role.Code>@role.RoleName</option>
+}
+
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mr-0 mt-3">
+                            <table id="gvMaster" class="table-sm table border-dark table-bordered table-responsive-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Menu Name</th>
+                                        <th>Code</th>
+                                        <th class="isEditChecBox">
+                                            @*<input   id="chkAllMenu" type="checkbox" />*@ Is Assgined
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/PageJS/Admin/RoleMenuMapping.js"></script>
+
+}

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.ExceptionLogModel>
+
+@{ ViewData["Title"] = "ExceptionLog";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+<style>
+    .morecontent span {
+        display: none;
+    }
+
+    .morelink, .ShowLess {
+        display: block;
+        color: blue;
+    }
+
+        .morelink:hover, .ShowLess:hover {
+            cursor: pointer;
+        }
+</style>
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-header bg-gray"><strong class="text-white">Exception Log</strong></div>
+        <div class="card-body">
+            <form asp-area="Admin" asp-action="Index" asp-controller="ExceptionLog" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-12 mr-0 mt-3" style="overflow-y:scroll">
+                        <table id="gvMaster" class="table-sm table border-dark table-bordered table-responsive-lg">
+                            <thead>
+                                <tr>
+                                    <th>UserCode</th>
+                                    <th>Code</th>
+                                    <th>MachineName</th>
+                                    <th>Url</th>
+
+                                    <th style="max-width:90px !important">ExceptionDetails</th>
+                                    <th>LOGDATE</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    
+    <script src="~/PageJS/Admin/ExceptionLog.js"></script>
+}

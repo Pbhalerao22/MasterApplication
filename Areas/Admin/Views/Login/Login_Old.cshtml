@@ -1,0 +1,58 @@
+﻿@model MasterApplication.Areas.Admin.Models.LoginModel
+@{ ViewData["Title"] = "Login";
+    Layout = "_LayoutFullScreen"; }
+
+<form class="container-fluid" asp-area="Admin" asp-controller="Login" asp-action="LoginUser" method="post">
+
+    <div class="animated fadeIn">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card-group">
+                    <div class="card p-4">
+                        <div class="card-body text-center">
+                            <centre><h1>emPower</h1></centre>
+                            <p class="text-muted">@ViewBag.LoginViewData</p>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-user"></i>
+                                    </span>
+                                </div>
+                                @Html.TextBoxFor(X => X.TXT_UserName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.TXT_UserName) })
+                                @*<input class="form-control" type="text" placeholder="Username">*@
+                            </div>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                </div>
+
+                                @Html.PasswordFor(X => X.TXT_Password, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.TXT_Password) })
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (@ViewData["ErrorMessage"] != null && @ViewData["ErrorMessage"].ToString().Length > 0)
+                                    {
+                                        <div class="alert alert-danger" role="alert">@ViewData["ErrorMessage"]</div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-primary px-4" type="submit">Login</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <button class="btn btn-link px-0" type="button">Forgot password?</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

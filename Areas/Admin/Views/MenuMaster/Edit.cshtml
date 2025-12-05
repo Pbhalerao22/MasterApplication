@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.MenuMasterModel>
+
+@{ ViewData["Title"] = "Menu Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml"; }
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Menu Edit</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="MenuMaster" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label">MenuName</label>
+                                <input asp-for="@Model.First().MenuName" class="form-control form-control-sm mandatory" autocomplete="off"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">MenuDescription </label>
+                                <input asp-for="@Model.First().MenuDesc" class="form-control form-control-sm mandatory " autocomplete="off"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Parent Menu</label>
+                                <select id="drpParentID" asp-for="@Model.First().ParentId" class="form-control form-control-sm">
+                                    @foreach (var menu in ViewBag.ParentMenu)
+                                    {
+                        <option value=@menu.Code>@menu.MenuName</option>}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Area Name</label>
+                                <input asp-for="@Model.First().AREANAME" class="form-control form-control-sm" autocomplete="off"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Controller Name</label>
+                                <input asp-for="@Model.First().CONTROLLERNAME" class="form-control form-control-sm" autocomplete="off"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Action Name</label>
+                                <input asp-for="@Model.First().ACTIONNAME" class="form-control form-control-sm" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">MenuSrno</label>
+                                <input asp-for="@Model.First().MenuSrno" class="form-control form-control-sm" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <div class="form-check  ">
+                                    @Html.CheckBoxFor(m => m.First().LOCKED)
+                                    <label class="form-check-label">Locked</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="bd-example">
+                                        <button type="submit" id="btnUpdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                            <i class="fe fe-check me-2"></i>Submit
+                                        </button>
+                                        <a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/MenuMaster/Index">
+                                            <i class="fe fe-arrow-left me-2"></i>
+                                            Back
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

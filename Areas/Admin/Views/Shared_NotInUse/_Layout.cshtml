@@ -1,0 +1,157 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - emPower</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <environment include="Development,Staging,Production">
+        <!-- VENDOR CSS -->
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <!-- Icons-->
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/lib/coreui/icons/css/coreui-icons.css" rel="stylesheet" />
+        <link href="~/lib/flag-icon-css/css/flag-icon.css" rel="stylesheet" />
+        <link href="~/lib/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" />
+        <link href="~/lib/pace-progress/css/pace.css" rel="stylesheet" />
+        <!-- MAIN CSS -->
+        <link href="~/lib/coreui/css/style.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/DataTables/jquery.dataTables.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/SweetAlert2/sweetalert2.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/toastr/toastr.min.css" asp-append-version="true" />
+
+        <link rel="stylesheet" href="~/css/jQuery/jquery-ui.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/Loader/Spinner2.css" asp-append-version="true" />
+    </environment>
+   
+
+    @RenderSection("Headers", required: false)
+
+    <style type="text/css">
+        /* width */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 1px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #262A2E;
+            border-radius: 11px;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #262A2E;
+            }
+            .mt-24{
+                margin-top:28px;
+            }
+    </style>
+
+
+    <!-- ICONS -->
+    <link rel="icon" type="image/x-icon" sizes="96x96" href="/favicon.ico">
+</head>
+
+<!-- BODY -->
+<body class="app header-fixed sidebar-fixed aside-menu-fixed  dark-theme ">
+
+    @*<partial name="_CookieConsentPartial" />*@
+
+    <!-- NAVBAR -->
+    <partial name="_NavBar" />
+    <!-- END NAVBAR -->
+
+    <div class="app-body">
+        <environment include="Development,Staging,Production">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/jquery/dist/jquery-ui.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+            <!-- CoreUI and necessary plugins-->
+            <script src="~/lib/pace-progress/js/pace.min.js"></script>
+
+           
+            <script src="~/lib/coreui/dist/js/coreui.js"></script>
+            <!-- Plugins and scripts required by this view-->
+           
+
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/lib/DataTables/jquery.dataTables.min.js"></script>
+            <script src="~/lib/SweetAlert2/sweetalert2.all.min.js"></script>
+            <script src="~/lib/toastr/toastr.min.js"></script>
+            <script src="~/PageJS/Common.js"></script>
+
+        </environment>
+     
+        <!-- LEFT SIDEBAR -->
+        @*<partial name="_SideBar"  />*@
+
+        @*@Html.Partial("_SideBar")*@
+
+        @await Component.InvokeAsync("Menu")
+
+        @*<partial name="Menu" model="new BuildYourTemplate.Models.MenuModel()" />*@
+
+        <!-- END LEFT SIDEBAR -->
+        <!-- MAIN CONTENT -->
+
+        <main class="main">
+
+            <!-- Breadcrumb-->
+            <!--<ol class="breadcrumb">-->
+            <!-- Breadcrumb Menu-->
+            <!--<li class="breadcrumb-menu text-center text-capitalize">
+
+            </li>
+        </ol>-->
+            <div class="body flex-grow-1 px-3">
+                <div class="container-lg">
+                    @RenderBody()
+                </div>
+            </div>
+
+        </main>
+        <!-- END MAIN CONTENT -->
+        <!-- ASIDE MENU -->
+        <partial name="_AsideMenu" />
+        <!-- END ASIDE MENU -->
+
+
+    </div>
+
+    <footer class="app-footer">
+        <div>
+            <a href="http://mokshasoftlabs.com/">Moksha Softlabs Pvt Ltd</a>
+            <span>&copy; @DateTime.Now.Year .</span>
+        </div>
+        <div class="ml-auto">
+            <span>Powered by</span>
+            <a href="http://mokshasoftlabs.com/">Moksha</a>
+        </div>
+    </footer>
+
+   <script type="text/javascript" language="javascript">
+     function DisableBackButton() {
+       window.history.forward()
+      }
+     DisableBackButton();
+     window.onload = DisableBackButton;
+     window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+     window.onunload = function() { void (0) }
+ </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

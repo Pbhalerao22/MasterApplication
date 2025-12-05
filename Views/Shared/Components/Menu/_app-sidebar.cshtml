@@ -1,0 +1,98 @@
+@model MasterApplication.Areas.Admin.Models.MainMenuModel
+
+<div class="app-sidebar__overlay" data-bs-toggle="sidebar" ></div>
+<div class="sticky">
+
+    @if (Model.menuModel.Count() == 0)
+    {
+        <input type="hidden" id="hfSessionState" value=@Model.menuModel.Count() LoginUrl=@Model.LoginURL />
+
+        @*<script type="text/javascript">
+            Swal.fire({
+                title: 'Your Session has expired, kindly login again!',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Go To Login',
+                allowOutsideClick: false
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location.href = "@Url.Action("Login","Login")";
+                } else if (result.isDenied) {
+                   window.location.href = "@Url.Action("Login","Login")";
+                }
+            })
+        </script>*@
+    }
+
+    <aside class="app-sidebar sidebar-scroll ps" style="background-color: #EBEBEB">
+        <div class="main-sidebar-header active" style="background-color: #EBEBEB">
+            <a class="desktop-logo logo-light active" asp-area="" asp-page="/Index"><img src="~/assets/img/Logo_Main.png"  alt="logo"></a>
+            
+            <a class="logo-icon mobile-logo icon-light active" asp-area="" asp-page="/Index"><img src="~/assets/img/Logo_Small.png" alt="logo"></a>
+            
+        </div>
+        <div class="main-sidemenu">
+            <div class="main-sidebar-loggedin">
+
+            </div>
+            <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" /></svg></div>
+            <ul class="side-menu ">
+                @{
+                    var Lst = Model.menuModel;
+                    foreach (var item in Lst.Where(x => x.ISTOPMENU == 1).ToList())
+                    {
+                        <li class="slide">
+                            <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0);"><i class="side-menu__icon bx bx-home-alt"></i><span class="side-menu__label">@item.MENUDESC</span><i class="angle fe fe-chevron-down"></i></a>
+                            <ul class="slide-menu">
+                                <li class="panel sidetab-menu">
+
+
+                                    <div class="panel-body tabs-menu-body p-0 border-0">
+                                        <div class="tab-content">
+                                            <div class="tab-pane tab-content-show" id="side11">
+                                                <ul class="sidemenu-list">
+                                                    <li class="side-menu__label1"><a href="javascript:void(0);">@item.MENUDESC</a></li>
+                                                    @foreach (var CurrItem in Lst.Where(Y => Y.PARENTID == item.MENUCODE && Y.PARENTID != Y.MENUCODE).OrderBy(O => O.MENUSRNO).ToList())
+                                                    {
+                                                        @*<li><a class="slide-item" asp-area=@CurrItem.AreaName asp-controller=@CurrItem.CONTROLLERNAME asp-action=@CurrItem.ActionName>@CurrItem.MENUDESC</a></li>*@
+                                                        @*<li><a href="@Url.Action(@CurrItem.ActionName,@CurrItem.CONTROLLERNAME,new {Area=@CurrItem.AreaName})" class="slide-item">@CurrItem.MENUDESC</a></li>*@
+                                                        <li>@Html.ActionLink(@CurrItem.MENUDESC, @CurrItem.ActionName, @CurrItem.CONTROLLERNAME, new { Area = @CurrItem.AreaName }, new { @class = "slide-item" })</li>
+                                                    }
+
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                }
+
+
+            </ul>
+            <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" /></svg></div>
+        </div>
+    </aside>
+</div>
+<script type="text/javascript">
+
+    //const fakeImages = document.querySelectorAll(".side-menu li");
+    //fakeImages.forEach(fakeImage => {
+    //    if (fakeImage.classList.contains("is-expanded")) {
+    //        fakeImage.classList.remove("is-expanded")
+    //    }
+    //});
+    /*
+    $('.side-menu li').each(function () {
+        if ($(this).hasClass('is-expanded')) {
+            $(this).removeClass('is-expanded')
+        }
+        if ($(this).find('a').hasClass('active')) {
+            $(this).find('a').removeClass('active')
+        }
+    })
+    */
+</script>

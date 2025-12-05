@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Audit Master";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Audit Master</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <div class="row mb-3">
+                       
+                        <div class="col-md-2">
+                            <label>Type</label>
+                            <select id="ddlType" class="form-control">
+                                <option value="">Select Type</option>
+                                @foreach (System.Data.DataRow row in ViewBag.Type)
+                                {
+                                    <option value="@row["CODE"]" data-daterange="@row["DATERANGE"]" data-UserDD="@row["UserDD"]">@row["TYPE"]</option>
+                                    @* <option value="@row["CODE"]">@row["TYPE"]</option> *@
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3" id="userContainer">
+                            <label>User</label>
+                            <select id="ddlUser" class="form-control">
+                                <option value="">Select User</option>
+                                @foreach (System.Data.DataRow row in ViewBag.UserList)
+                                {
+                                    <option value="@row["Code"]">@row["UserName"]</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4" id="dateRangeContainer">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="fromDate">From Date</label>
+                                    <input type="date" id="fromDate" class="form-control form-control-sm" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="toDate">To Date</label>
+                                    <input type="date" id="toDate" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button id="btnSearch" class="btn  btn-outline-primary  me-2">Search</button>
+                            <button id="btnDownload" class="btn btn-outline-success">Download</button>
+                        </div>
+                    </div>
+
+                    <div id="auditTableContainer" class="mt-4"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/PageJS/Admin/AuditMaster.js"></script>
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+                    toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+                    toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+                    toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+                    toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+                }
+
+            })
+        </script>
+    }
+}

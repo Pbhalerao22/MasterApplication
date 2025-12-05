@@ -1,0 +1,459 @@
+﻿@model MasterApplication.Areas.Admin.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutFullScreen";
+}
+@* <form class="container-fluid" asp-area="Admin" asp-controller="Login" asp-action="LoginUser" method="post">
+    <div class="logo"></div>
+    <div class="login-block">
+        <h1>Login</h1>
+        @Html.TextBoxFor(X => X.TXT_UserName, new { @placeholder = Html.DisplayNameFor(x => x.TXT_UserName) })
+        @Html.PasswordFor(X => X.TXT_Password, new { @placeholder = Html.DisplayNameFor(x => x.TXT_Password) })
+        <button id="btnLoginSubmit">Submit</button>
+    </div>
+</form> *@
+<link href="~/css/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.min.js" ></script>
+<script src="~/lib/SweetAlert2/sweetalert2.all.min.js" ></script>
+<script src="~/pagejs/admin/login.js" ></script>
+<Style >
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Nunito", sans-serif;
+        color: rgba(0, 0, 0, 0.7);
+    }
+
+    .container {
+        height: 200vh;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .modal {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        /* background: rgba(51, 51, 51, 0.5); */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+        
+    }
+
+    .modal-container {
+        display: flex;
+        max-width: 750px;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        transition-duration: 0.3s;
+        /* background: #fff;*/
+        background: rgba(255, 255, 255, 0.3);
+        
+        transform: translateY(10px) scale(0.4);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .modal-title {
+        font-size: 26px;
+        margin: 0;
+        font-weight: 400;
+        color: #55311c;
+    }
+
+    .modal-App {
+        font-size: 24px;
+        margin: 0;
+        font-weight: bolder;
+        color: #F28C28;
+    }
+
+    .modal-desc {
+        margin: 6px 0 30px 0;
+        font-weight: bold;
+    }
+
+    .modal-left {
+        padding: 20px 30px 20px;
+        background: #fff;
+        flex: 1.5;
+        transition-duration: 0.5s;
+        transform: translateY(80px);
+        opacity: 0;
+        
+    }
+
+    .modal-button {
+        color: #7d695e;
+        font-family: "Nunito", sans-serif;
+        font-size: 18px;
+        cursor: pointer;
+        border: 0;
+        outline: 0;
+        padding: 10px 40px;
+        border-radius: 30px;
+        background: white;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
+        transition: 0.3s;
+    }
+
+        .modal-button:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            /* background: rgba(255, 255, 255, 0.8); */
+        }
+
+    .modal-right {
+        flex: 2;
+        font-size: 0;
+        transition: 0.3s;
+        overflow: hidden;
+       
+    }
+
+        .modal-right img {
+            width: 100%;
+            height: 100%;
+            transform: scale(2);
+            -o-object-fit: cover;
+            object-fit: cover;
+            transition-duration: 1.2s;
+        }
+
+    .modal.is-open {
+        height: 100%;
+        /* background: rgba(51, 51, 51, 0.85); */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* background: radial-gradient(circle, rgba(242,101,34,0.3) 30%, rgba(242,101,34,0.6) 70%, rgba(242,101,34,0.9) 100%); */
+        z-index: 999;
+    }
+
+        .modal.is-open .modal-button {
+            opacity: 0;
+        }
+
+        .modal.is-open .modal-container {
+            opacity: 1;
+            transition-duration: 0.6s;
+            pointer-events: auto;
+            transform: translateY(-20px) scale(1);
+        }
+
+        .modal.is-open .modal-right img {
+            transform: scale(1);
+        }
+
+        .modal.is-open .modal-left {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.1s;
+        }
+
+    .modal-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .modal-buttons a {
+            color: rgba(51, 51, 51, 0.6);
+            font-size: 14px;
+        }
+
+    .sign-up {
+        margin: 60px 0 0;
+        font-size: 14px;
+        text-align: center;
+    }
+
+        .sign-up a {
+            color: #8c7569;
+        }
+
+    .input-button {
+        padding: 8px 12px;
+        outline: none;
+        border: 0;
+        color: #fff;
+        border-radius: 4px;
+        background: #F28C28;
+        font-family: "Nunito", sans-serif;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+        .input-button:hover {
+            background: #55311c;
+        }
+
+    .input-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-family: "Nunito", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.7px;
+        color: #8c7569;
+        transition: 0.3s;
+    }
+
+    .input-block {
+        display: flex;
+        flex-direction: column;
+        padding: 3px 4px 3px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        transition: 0.3s;
+    }
+
+        .input-block input {
+            outline: 0;
+            border: 0;
+            padding: 4px 0 0;
+            font-size: 14px;
+            font-family: "Nunito", sans-serif;
+        }
+
+            .input-block input::-moz-placeholder {
+                color: #ccc;
+                opacity: 1;
+            }
+
+            .input-block input:-ms-input-placeholder {
+                color: #ccc;
+                opacity: 1;
+            }
+
+            .input-block input::placeholder {
+                color: #ccc;
+                opacity: 1;
+            }
+
+        .input-block:focus-within {
+            border-color: #8c7569;
+        }
+
+            .input-block:focus-within .input-label {
+                color: rgba(140, 117, 105, 0.8);
+            }
+
+    .icon-button {
+        outline: 0;
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        width: 32px;
+        height: 32px;
+        border: 0;
+        background: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .scroll-down {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: #7d695e;
+        font-size: 32px;
+        font-weight: 800;
+        transform: translate(-50%, -50%);
+    }
+
+        .scroll-down svg {
+            margin-top: 16px;
+            width: 52px;
+            fill: currentColor;
+        }
+
+    .modal-footer {
+        font-size: 10px;
+        position: relative;
+        outline: 0;
+        position: absolute;
+        right: 10px;
+        top: 93%;
+        border: 0;
+        background: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    logo-img {
+        max-width: 300px;
+        margin: 0 auto 20px auto; /* centers the image, adds spacing below */
+        display: block;
+    }
+
+</Style>
+@* <div class="scroll-down">
+    SCROLL DOWN
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+        <path d="M16 3C8.832031 3 3 8.832031 3 16s5.832031 13 13 13 13-5.832031 13-13S23.167969 3 16 3zm0 2c6.085938 0 11 4.914063 11 11 0 6.085938-4.914062 11-11 11-6.085937 0-11-4.914062-11-11C5 9.914063 9.914063 5 16 5zm-1 4v10.28125l-4-4-1.40625 1.4375L16 23.125l6.40625-6.40625L21 15.28125l-4 4V9z" />
+    </svg>
+</div> *@
+<div class="container"></div>
+<div class="modal">
+    <div class="modal-container">
+
+        <div class="modal-left">
+            <img src="~/assets/img/logo-bg-white 2.png" class="logo-img" />
+            <form class="container-fluid" asp-area="Admin" asp-controller="Login" asp-action="LoginUser" method="post">
+                
+                <h2 class="modal-App">emPower </h2>
+                @* <h6 class="modal-title">Welcome!</h6> *@
+                <p class="modal-desc">Enter credentials to login</p>
+                <div class="input-block">
+                    <label for="email" class="input-label">Username</label>
+                    @* <input type="email" name="email" id="email" placeholder="Email"> *@
+                    <input asp-for="TXT_UserName" id="idHndUserName" type="hidden" class="form-control form-control-sm mandatory" autocomplete="one-time-code" autoCompleteType="disable" />
+
+                    <input id="idUserName" class="form-control form-control-sm mandatory" autocomplete="one-time-code" autoCompleteType="disable" placeholder="Enter Username" />
+
+                </div>
+                <div class="input-block">
+                    <label for="password" class="input-label">Password</label>
+                    @* <input type="password" name="password" id="password" placeholder="Password"> *@
+                    <input id="idPassword" type="password" class="form-control form-control-sm mandatory" autocomplete="one-time-code" autoCompleteType="disable" placeholder="Password" />
+                    @* @Html.PasswordFor(X => X.TXT_Password, new { @placeholder = Html.DisplayNameFor(x => x.TXT_Password) }) *@
+                    <input asp-for="TXT_Password" id="idHdnPassword" type="hidden" class="form-control form-control-sm" autocomplete="one-time-code" autoCompleteType="disable" placeholder="Enter Password" />
+                </div>
+                @if (TempData.Count > 0 && TempData["Message"] != null)
+                {
+                    if (@TempData["Message"] == "LoginChk")
+                    {
+                        <script type="text/javascript" >LoginChk()</script>
+                    }
+                    else if (@TempData["Message"].ToString().Split('|')[0] == "errorLimit")
+                    {
+                        <script type="text/javascript">errorLock()</script>
+                    }
+                    else if (@TempData["Message"].ToString().Split('|')[0] == "errorLimit")
+                    {
+                        <script type="text/javascript" >errorLimit()</script>
+                    }
+                    else if (@TempData["Message"].ToString().Split('|')[0] == "errorInvalid")
+                    {
+                        <script type="text/javascript" >errorInvalid()</script>
+                    }
+                    else if (@TempData["Message"].ToString().Split('|')[0] == "nullValues")
+                    {
+                        <script type="text/javascript" >nullValues()</script>
+                    }
+
+                }
+                <div class="modal-buttons">
+
+                    <p class="" target="_self" style="color:transparent;">Forgot your password? </p>
+                    <button class="input-button" type="submit" id="btnLoginSubmit">Login</button>
+                </div>
+                <p class="modal-footer fs-17">Copyright by Moksha Softlabs Pvt Ltd.</p>
+            </form>
+        </div>
+        <div class="modal-right">
+            @* <img src="https://mokshasoftlabs.com/wp-content/themes/moksha/assets/images/why-choose.webp" alt=""> *@
+            <img src="~/assets/img/profile1.png" />
+        </div>
+        <button class="icon-button close-button" style="display:none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                <path d="M 25 3 C 12.86158 3 3 12.86158 3 25 C 3 37.13842 12.86158 47 25 47 C 37.13842 47 47 37.13842 47 25 C 47 12.86158 37.13842 3 25 3 z M 25 5 C 36.05754 5 45 13.94246 45 25 C 45 36.05754 36.05754 45 25 45 C 13.94246 45 5 36.05754 5 25 C 5 13.94246 13.94246 5 25 5 z M 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.980469 15.990234 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 z"></path>
+            </svg>
+        </button>
+        
+    </div>
+
+    <button class="modal-button" style="display:none;">Click here to login</button>
+</div>
+
+
+<script type="text/javascript" >
+    $(document).ready(function () {
+        $("body").keydown(function (e) {
+            if (e.keyCode == 13) {
+                $('#btnLoginSubmit').trigger('click')
+            }
+        });
+
+        $('#idPassword,#idUserName').on('input propertychange paste', function () {
+            //$('#idPassword').blur(function () {
+            enCryptPass();
+        });
+        function enCryptPass() {
+            var strPass = $('#idPassword').val();
+            var strUserName = $('#idUserName').val();
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/v2/Admin/Login/EnctryptSting",
+                    data: { Pass: strPass, UserName: strUserName },
+                    dataType: "json",
+                    success: function (data) {
+
+                        //       console.log(data);
+                        var strEncrypt_Pass = String(data.password);
+                        var strEncrypt_UserName = String(data.username);
+
+                        //  console.log("strEncrypt_Pass: "+strEncrypt_Pass+"  |  "+"strEncrypt_UserName: "+strEncrypt_UserName)
+                        $('#idHdnPassword').val(strEncrypt_Pass);
+                        $('#idHndUserName').val(strEncrypt_UserName);
+                    }
+                });
+        };
+        const body = document.querySelector("body");
+        const modal = document.querySelector(".modal");
+        const modalButton = document.querySelector(".modal-button");
+        const closeButton = document.querySelector(".close-button");
+        const scrollDown = document.querySelector(".scroll-down");
+        let isOpened = false;
+
+        const openModal = () => {
+            modal.classList.add("is-open");
+            body.style.overflow = "hidden";
+        };
+
+        const closeModal = () => {
+            modal.classList.remove("is-open");
+            body.style.overflow = "initial";
+        };
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > window.innerHeight / 3 && !isOpened) {
+                isOpened = true;
+                scrollDown.style.display = "none";
+                openModal();
+            }
+        });
+
+        modalButton.addEventListener("click", openModal);
+        closeButton.addEventListener("click", closeModal);
+
+        document.onkeydown = evt => {
+            evt = evt || window.event;
+            evt.keyCode === 27 ? closeModal() : false;
+        };
+        $('.modal-button').trigger('click')
+
+    })
+
+
+
+</script>

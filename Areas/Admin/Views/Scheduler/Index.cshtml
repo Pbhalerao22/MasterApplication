@@ -1,0 +1,66 @@
+﻿@model MasterApplication.Areas.Admin.Models.SchedulerModel
+@{
+    ViewData["Title"] = "Scheduler Execution Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Common Scheduler Details</h4>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="pd-5 pd-sm-5 bg-gray-100">
+                <a class="btn btn-outline-primary btn-sm mb-1" asp-area="Admin" asp-controller="Scheduler" asp-action="Create"><i class="fe fe-plus me-2"></i>Add New</a>
+                <div class="row">
+                    <div class="col-md-12 mr-0 mt-3">
+                        <div style="width:85vw;overflow-y:scroll">
+                            <table id="gvMaster" class="table-sm table border-dark table-bordered table-responsive-lg">
+                                <thead>
+                                    <tr style="background-color: #E7E7E7; ">
+                                        <th>Code</th>
+                                        <th>PROJECT NAME</th>
+                                        <th>PROCESS TYPE</th>
+                                        <th>EXECUTION DATE</th>
+                                        <th>EXECUTION TIME</th>
+                                        <th>PROCESS STATUS</th>
+                                        <th>ACTION</th>
+                                        @*<th>EMAIL ID</th>*@
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/PageJS/Admin/Scheduler.js"></script>
+   
+
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+                    toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+                    toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+                    toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+                    toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+                }
+
+            })
+        </script>
+    }
+}

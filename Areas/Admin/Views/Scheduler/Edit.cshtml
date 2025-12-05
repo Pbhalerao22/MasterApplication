@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.SchedulerModel>
+
+@{
+    ViewData["Title"] = "Scheduler Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-header justify-content-between">
+    <div>
+        <h4 class="content-title mb-2">Edit Scheduler</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body ">
+                <div class="pd-5 pd-sm-5 bg-gray-100">
+                    <form asp-area="Admin" asp-action="Edit" asp-controller="Scheduler" class="form-horizontal">
+                        <div class="row">
+                            <input type="hidden" asp-for="@Model.First().CODE" />
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Project Name: </label>
+                                <input asp-for="@Model.First().ProjectName" readonly class="form-control form-control-sm mandatory" autocomplete="off" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Process Type: </label>
+                                <input asp-for="@Model.First().PROCESS_TYPE" readonly class="form-control form-control-sm mandatory" autocomplete="off" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Execution Date: </label>
+                                <input asp-for="@Model.First().EXECUTION_DATE" class="form-control form-control-sm mandatory" autocomplete="off" readonly />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Execution Time: </label>
+                                <input asp-for="@Model.First().EXECUTION_TIME" id="EXtime" class="form-control form-control-sm mandatory" maxlength="8" autocomplete="off" />
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Process Status: </label>
+                                <input asp-for="@Model.First().ProcessStatus" id="ProCessStatus" class="form-control form-control-sm mandatory" maxlength="200" autocomplete="off" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label"> Email Ids: </label>
+                                <textarea asp-for="@Model.First().EMAILIDS" id="MailIds" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="bd-example">
+                                    <button type="submit" id="btnUpdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+                                        <i class="fe fe-check me-2"></i>Update
+                                    </button>
+                                    <a class="btn btn-outline-danger btn-sm mb-1" href="/v2/Admin/Scheduler/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/PageJS/IRCTCTXN/Scheduler.js"></script>
+
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                if ('@TempData["Message"].ToString().Split('|')[0]' == "success") {
+                    toastr.success('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "error") {
+                    toastr.error('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "warning") {
+                    toastr.warning('@TempData["Message"].ToString().Split('|')[1]');
+                }
+                else if ('@TempData["Message"].ToString().Split('|')[0]' == "info") {
+                    toastr.info('@TempData["Message"].ToString().Split('|')[1]');
+                }
+            })
+        </script>
+    }
+}

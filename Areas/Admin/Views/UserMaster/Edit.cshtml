@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MasterApplication.Areas.Admin.Models.UserMasterModel>
+
+@{
+	ViewData["Title"] = "User Edit";
+	Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb-header justify-content-between">
+	<div>
+		<h4 class="content-title mb-2">Edit User</h4>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 col-lg-12">
+		<div class="card">
+			<div class="card-body ">
+				<div class="pd-5 pd-sm-5 bg-gray-100">
+
+					<form asp-area="Admin" asp-action="Edit" asp-controller="UserMaster" class="form-horizontal">
+						<div class="row">
+							<input type="hidden" asp-for="@Model.First().CODE" />
+							<div class="form-group col-md-4">
+								<label class="control-label">UserName</label>
+								<input asp-for="@Model.First().USERNAME" readonly class="form-control form-control-sm mandatory" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Full Name</label>
+								<input asp-for="@Model.First().FULLNAME" class="form-control form-control-sm mandatory" autocomplete="off" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Security Question</label>
+								<select id="drpEmpList" asp-for="@Model.First().SECURITYQUESTION" class="form-control form-control-sm mandatory">
+									@foreach (var security in ViewBag.SecurityMaster)
+									{
+										<option value=@security.Value>@security.SECURITYQUESTION</option>
+									}
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Security Answer</label>
+								<input asp-for="@Model.First().SECURITYANSWER" class="form-control form-control-sm mandatory" autocomplete="off" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-2">
+								<div class="form-check  ">
+									@Html.CheckBoxFor(m => m.First().ISADMIN)
+									<label class="form-check-label">Admin Rights</label>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<div class="form-check ">
+									@*<input type="checkbox" @( @Model.First().ISADUSER == "1" ? "checked" : "" ) asp-for="ISADUSER" class="form-check-input" />*@
+
+									@Html.CheckBoxFor(m => m.First().ISADUSER)
+									<label class="form-check-label">Domain User</label>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<div class="form-check  ">
+									@Html.CheckBoxFor(m => m.First().LOCKED)
+									<label class="form-check-label">Locked</label>
+								</div>
+							</div>
+							@if (ViewBag.IsAdmin == 1)
+							{
+								<div class="form-group col-md-4">
+									<div style="display:flex;float:left">
+										<label class="control-label">Login Attempt</label>
+										<input asp-for="@Model.First().LOGINATTEMPTS" min="0" max="10" type="number" class="form-control form-control-sm mandatory" />
+									</div>
+								</div>
+							}
+						</div>
+						<div class="form-group">
+							<div class="col-md-4">
+								<div class="bd-example">
+									<button type="submit" id="btnupdate" onclick="return CheckMandatory();" class="btn btn-outline-primary btn-sm mb-1">
+										<i class="fe fe-check me-2"></i>Update
+									</button>
+									<a class="btn btn-outline-danger btn-sm mb-1" href="/Admin/UserMaster/Index"><i class="fe fe-arrow-left me-2"></i>Back</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
