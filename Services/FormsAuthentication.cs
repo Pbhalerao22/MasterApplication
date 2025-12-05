@@ -168,46 +168,6 @@ namespace MasterApplication.Services
             return false;
         }
 
-        public static void LMS_LogException(Exception ex, HttpRequest request, ISession session, string FormName, string MethodName, DBAccess dBAccess)
-        {
-            try
-            {
-                string a = request.Path;
-                // Get UserHostAddress property.
-                string MachineName = Environment.MachineName;
-                string url = request.Path;
-                // ht tp://localhost:1302/TESTERS/Default6.aspx
-                string path = request.Path;
-                // /TESTERS/Default6.aspx
-                string host = request.Host.Value;
-                ActiveUser av = GetCurrentUser(session);
-                List<OracleParameter> commands = new List<OracleParameter>();
-
-                commands.Add(new OracleParameter("p_UserCode", OracleDbType.Varchar2, av.UserCode, System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("p_MachineName", OracleDbType.Varchar2, (MachineName.Trim().Length == 0 ? host : MachineName), System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("p_Url", OracleDbType.Varchar2, url, System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("p_FormName", OracleDbType.Varchar2, FormName, System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("p_MethodName", OracleDbType.Varchar2, MethodName, System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("p_ExceptionDetails", OracleDbType.Varchar2, ("Exception Message : " + ex.Message + " -:-> Inner Exception :" + ex.ToString()), System.Data.ParameterDirection.Input));
-                commands.Add(new OracleParameter("ResulSet", OracleDbType.RefCursor, null, System.Data.ParameterDirection.Output));
-
-
-                DataSet ds = dBAccess.ExecuteDataSet_LMS("EXCEPTIONLOG_INSERT", commands);
-
-            }
-            catch (Exception ef)
-            {
-                //if (!Directory.Exists(HttpContext.Current.Server.MapPath("~/Logs/")))
-                //{
-                //    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Logs/"));
-                //}
-                //using (StreamWriter _LogException = new StreamWriter(HttpContext.Current.Server.MapPath("~/Logs/" + DateTime.Now.Day.ToString() + "_" + DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString() + ".txt"), true))
-                //{
-                //    _LogException.WriteLine(DateTime.Now.ToString() + " ==> " + ef.Message + ef.StackTrace); // Write the file.
-                //}
-            }
-
-
-        }
+     
     }
 }

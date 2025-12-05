@@ -132,21 +132,7 @@ namespace MasterApplication.Services
             DataSet DataSet = dBAccess.ExecuteDataSet("USP_BOB_GET_FILE_PATH", lstParams);
             return DataSet;
         }
-        public void LMS_ProcessLogInsertUpdate(string ProcessType, string FileName, string Status, string StatusDesc, string SessionID, string DMLType, string ServiceType, DBAccess dBAccess)
-        {
-            DataSet ds = new DataSet();
-            List<OracleParameter> lstParams = new List<OracleParameter>();
-
-            lstParams.Add(new OracleParameter("P_ProcessType", OracleDbType.Varchar2, ProcessType, ParameterDirection.Input));
-            lstParams.Add(new OracleParameter("P_FileName", OracleDbType.Varchar2, FileName, ParameterDirection.Input));
-            lstParams.Add(new OracleParameter("P_Status", OracleDbType.Varchar2, Status, ParameterDirection.Input));
-            lstParams.Add(new OracleParameter("P_StatusDesc", OracleDbType.Varchar2, StatusDesc, ParameterDirection.Input));
-            lstParams.Add(new OracleParameter("P_SessionID", OracleDbType.Varchar2, SessionID, ParameterDirection.Input));
-            // lstParams.Add(new OracleParameter("P_InsertUpdate", OracleDbType.Varchar2, DMLType, ParameterDirection.Input));
-            lstParams.Add(new OracleParameter("P_serviceType", OracleDbType.Varchar2, ServiceType, ParameterDirection.Input));
-
-            DataSet DataSet = dBAccess.ExecuteDataSet_LMS("USP_BOB_PROCESSLOGINSERTUPDATE", lstParams);
-        }
+ 
         public void ProcessLogInsertUpdate(string ProcessType, string FileName, string Status, string StatusDesc, string SessionID, string DMLType, string ServiceType, DBAccess dBAccess)
         {
             DataSet ds = new DataSet();
@@ -162,24 +148,7 @@ namespace MasterApplication.Services
 
             DataSet DataSet = dBAccess.ExecuteDataSet("USP_BOB_PROCESSLOGINSERTUPDATE", lstParams);
         }
-        public DataSet LMS_GetMasterForGrid(string strSearchValue, string strSearchColumn,
-       string strOrderByColumn, string strOrderByType, int iPageNo, int iPageNoOfRows, string ViewName, DependancyInjection DI)
-        {
-            List<OracleParameter> commands = new List<OracleParameter>();
-
-            commands.Add(new OracleParameter("p_viewname", OracleDbType.Varchar2, ViewName, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_SearchColumn", OracleDbType.Varchar2, strSearchColumn, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_SearchValue", OracleDbType.Varchar2, strSearchValue, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_OrderByCol", OracleDbType.Varchar2, strOrderByColumn, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_OrderByType", OracleDbType.Varchar2, strOrderByType, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_PageNo", OracleDbType.Varchar2, iPageNo, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("p_NoOfRows", OracleDbType.Varchar2, iPageNoOfRows, System.Data.ParameterDirection.Input));
-            commands.Add(new OracleParameter("v_CursorToalRecords", OracleDbType.RefCursor, null, System.Data.ParameterDirection.Output));
-            commands.Add(new OracleParameter("v_CursorFetchRecords", OracleDbType.RefCursor, null, System.Data.ParameterDirection.Output));
-
-            DataSet ds = DI.dBAccess.ExecuteDataSet_LMS("USP_BOB_COMMONGRIDDATA", commands);
-            return ds;
-        }
+     
         public DataSet GetMasterForGrid_UPP(string Query,
           //string strSearchValue, string strSearchColumn,
           string strOrderByColumn, string strOrderByType, int iPageNo, int iPageNoOfRows, string ViewName, DependancyInjection DI)
