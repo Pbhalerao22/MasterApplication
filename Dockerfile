@@ -1,16 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 
-# Copy only the project file(s) first
+# Copy only the project file first to leverage caching
 COPY MasterApplication.csproj ./
-
-# Restore ONLY this project
 RUN dotnet restore MasterApplication.csproj
 
-# Copy the rest of the files
+# Copy the rest of the source code
 COPY . ./
 
-# Publish ONLY this project
+# Publish
 RUN dotnet publish MasterApplication.csproj -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS final
