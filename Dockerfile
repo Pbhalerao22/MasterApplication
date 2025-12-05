@@ -1,27 +1,26 @@
-# Build Stage
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 
 WORKDIR /src
 
-# Copy everything from repo
+# Copy everything
 COPY . .
 
-# Enter the project folder EXACTLY as it is named in your repo
-WORKDIR /src/MasterApplication
-
-# Restore dependencies
+# Restore dependencies (project is in root)
 RUN dotnet restore
 
 # Publish
 RUN dotnet publish -c Release -o /app/publish
 
 
-# Runtime Stage
+# Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS final
 
 WORKDIR /app
+
 COPY --from=build /app/publish .
 
+# Render uses port 8080
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
