@@ -21,4 +21,4 @@ EXPOSE 8080
 # Set environment variable for Render
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "SeedInvoiceApp.dll"]
+ENTRYPOINT ["dotnet", "MasterApplication.dll"]
