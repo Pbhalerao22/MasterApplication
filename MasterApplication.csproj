@@ -102,6 +102,12 @@
     <PackageReference Include="SSH.NET" Version="2023.0.0" />
     <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="26.1.35" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+
+	<PackageReference Include="iTextSharp" Version="5.5.13.3" />
+	<PackageReference Include="BouncyCastle" Version="1.8.10" />
+	
+
+
   </ItemGroup>
 
   <ItemGroup>
