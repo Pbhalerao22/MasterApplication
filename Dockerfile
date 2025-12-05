@@ -7,6 +7,13 @@ WORKDIR /app
 # Copy all pre-built binaries from host to container
 COPY bin/Debug/netcoreapp3.1/ ./
 
+# Copy MVC Views and static files
+COPY Views/ ./Views/
+COPY wwwroot/ ./wwwroot/
+
+# Copy configuration files
+COPY appsettings*.json ./
+
 # Expose port 8080
 EXPOSE 8080
 
