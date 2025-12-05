@@ -6,8 +6,8 @@ WORKDIR /src
 # Copy everything
 COPY . .
 
-# Navigate into the actual project folder
-WORKDIR /src/MasterApplication
+# Navigate into the actual project folder (lowercase!)
+WORKDIR /src/masterapplication
 
 # Restore
 RUN dotnet restore
@@ -25,4 +25,4 @@ COPY --from=build /app/publish .
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
-ENTRYPOINT ["dotnet", "MasterApplication.dll"]
+ENTRYPOINT ["dotnet", "masterapplication.dll"]
