@@ -1,11 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 
-# Copy only the project file first to leverage caching
+# Copy project file
 COPY MasterApplication.csproj ./
-RUN dotnet restore MasterApplication.csproj
 
-# Copy the rest of the source code
+# Copy the external DLL folder
+COPY ../../../../DLL/BOB_ePower_Dll ./DLL
+
+# Copy rest of the source code
 COPY . ./
 
 # Publish
@@ -17,5 +19,4 @@ COPY --from=build /app/publish .
 
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
-
 ENTRYPOINT ["dotnet", "MasterApplication.dll"]
