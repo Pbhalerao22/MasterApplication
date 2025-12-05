@@ -1,5 +1,5 @@
 # Use official .NET 8 SDK image for building
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 
 # Copy the project file and restore dependencies
@@ -12,7 +12,7 @@ COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
 # Use .NET runtime for running
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
