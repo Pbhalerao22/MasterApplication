@@ -1,22 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
-WORKDIR /src
+# Use the official .NET Core runtime image (no SDK needed)
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS runtime
 
-# Copy project file
-COPY MasterApplication.csproj ./
-
-# Copy the external DLL folder
-COPY bin/Debug/netcoreapp3.1/ ./DLL
-
-# Copy rest of the source code
-COPY . ./
-
-# Publish
-RUN dotnet publish MasterApplication.csproj -c Release -o /app/publish
-
-FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS final
+# Set working directory inside container
 WORKDIR /app
-COPY --from=build /app/publish .
 
+# Copy all pre-built binaries from host to container
+COPY bin/Debug/netcoreapp3.1/ ./
+
+# Expose port 8080
 EXPOSE 8080
+
+# Set ASP.NET Core to listen on port 8080
 ENV ASPNETCORE_URLS=http://+:8080
+
+# Run the main DLL
 ENTRYPOINT ["dotnet", "MasterApplication.dll"]
