@@ -1,15 +1,16 @@
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 
+# Set working directory
 WORKDIR /src
 
-# Copy everything
+# Copy entire repo
 COPY . .
 
-# Navigate into the project folder
+# Navigate into the actual project folder
 WORKDIR /src/MasterApplication
 
-# Restore
+# Restore dependencies
 RUN dotnet restore
 
 # Publish
