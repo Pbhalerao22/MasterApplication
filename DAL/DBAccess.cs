@@ -300,42 +300,7 @@ namespace MasterApplication.DAL
                 return false;
             }
         }
-        public DataSet ExecuteDataSet_LMS(string procName, List<OracleParameter> lstParams)
-        {
-            DataSet dsResult = new DataSet();
-            try
-            {
-                string _stcon = myAppSettings.LMS_OracleConnection;
-                string stcon = MSEncrypto.Encryption.Decrypt(_stcon);
-
-                OracleConnection conn = new OracleConnection(stcon);
-
-                OracleCommand cmd = conn.CreateCommand();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = procName;
-
-                conn.Open();
-
-                if (lstParams != null)
-                {
-                    foreach (OracleParameter oracleParameter in lstParams)
-                    {
-                        cmd.Parameters.Add(oracleParameter);
-                    }
-                }
-                OracleDataAdapter adapter = new OracleDataAdapter(cmd);
-
-                adapter.Fill(dsResult);
-                conn.Close();
-
-                return dsResult;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
+      
 
         public  string ProjectSetting_Fetch(string ProjectName, string KeyName, DependancyInjection DI)
         {
