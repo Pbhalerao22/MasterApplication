@@ -2,8 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy csproj and restore dependencies
-COPY *.csproj ./
+# Copy the project file and restore dependencies
+# This assumes your MasterApplication.csproj is in the root of your repo
+COPY MasterApplication.csproj ./
 RUN dotnet restore
 
 # Copy everything else and build
@@ -15,10 +16,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Expose port
+# Expose the correct ports for Render's environment
 EXPOSE 8080
 
 # Set environment variable for Render
 ENV ASPNETCORE_URLS=http://+:8080
 
+# The entry point command must match the name of your published DLL
 ENTRYPOINT ["dotnet", "MasterApplication.dll"]
