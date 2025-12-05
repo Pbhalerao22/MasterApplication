@@ -5,7 +5,7 @@ WORKDIR /src
 COPY MasterApplication.csproj ./
 
 # Copy the external DLL folder
-COPY ../../../../DLL/BOB_ePower_Dll ./DLL
+COPY bin/Debug/netcoreapp3.1/ ./DLL
 
 # Copy rest of the source code
 COPY . ./
